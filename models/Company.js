@@ -46,17 +46,17 @@ const CompanySchema = new mongoose.Schema({
     toObject: {virtuals: true}
 }) ;
 
-CompanySchema.pre('deleteOne', { document: true, query: false }, async function (next) { 
-    console.log(`Bookings being removed from company ${this._id}`);
-    await this.model('Booking').deleteMany({company: this._id});
-    next();
-});
-
 CompanySchema.virtual('bookings',{
     ref: 'Booking' ,
     localField: '_id',
     foreignField: 'company',
     justOne: false
+});
+
+CompanySchema.pre('deleteOne', { document: true, query: false }, async function (next) { 
+    console.log(`Bookings being removed from company ${this._id}`);
+    await this.model('Booking').deleteMany({company: this._id});
+    next();
 });
 
 module.exports = mongoose.model('Company',CompanySchema); 

@@ -3,21 +3,21 @@ const mongoose =require('mongoose') ;
 const BookingSchema = new mongoose.Schema({
     apptData: {
         type: Date,
-        required: true
+        required: true,
     },
     user: {
         type: mongoose.Schema.ObjectId ,
         ref: 'User' ,
-        required: true
+        required: true,
     },
     Company: {
         type: mongoose.Schema.ObjectId ,
         ref: 'Company' ,
-        required: true
+        required: true,
     },
     createdAt: {
         type: Date,
-        default: Date.now
+        default: Date.now,
     }
 });
 

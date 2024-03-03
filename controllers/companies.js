@@ -15,26 +15,27 @@ exports.getCompanies= async (req,res,next) => {
     query = Company.find(JSON.parse(queryStr)).populate('bookings') ;
 
     if(req.query.select){
-        const fields = req.query.select.split(',').join(' ') ;
+        const fields = req.query.select.split(',').join(" ") ;
         query = query.select(fields) ;
     }
     if(req.query.sort){
-        const sortBy = req.query.sort.split(',').join(' ') ;
+        const sortBy = req.query.sort.split(',').join(" ") ;
         query = query.sort(sortBy) ;
     }
     else{
         query = query.sort('name') ;
     }
 
+    const page= parseInt(req.query.page,10) || 1 ;
+    const limit= parseInt(req.query.limit,10) || 25 ;
+    const startIndex= (page-1)*limit ;
+    const endIndex= page*limit ;
+    const total= await Company.countDocuments() ;
+
     try{
         // const companies = await Company.find(req.query);
         // console.log(req.query) ;
 
-        const page= parseInt(req.query.page,10) || 1 ;
-        const limit= parseInt(req.query.limit,10) || 25 ;
-        const startIndex= (page-1)*limit ;
-        const endIndex= page*limit ;
-        const total= await Company.countDocuments() ;
 
         query= query.skip(startIndex).limit(limit) ;
 
@@ -45,13 +46,13 @@ exports.getCompanies= async (req,res,next) => {
             pagination.next= {
                 page: page+1 ,
                 limit
-            }
+            };
         }
         if (startIndex>0){
             pagination.prev= {
                 page: page-1 ,
                 limit
-            }
+            };
         }
         res.status(200).json({success:true, count:companies.length , pagination , data:companies});
     }catch(err){

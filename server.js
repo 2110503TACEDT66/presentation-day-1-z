@@ -7,9 +7,9 @@ dotenv.config({path:'./config/config.env'});
 
 connectDB();
 
-const hospitals = require(`./routes/companies`);
-const auth = require('./routes/auth');
+const companies = require('./routes/companies');
 const bookings = require('./routes/bookings');
+const auth = require('./routes/auth');
 
 const app = express();
 
@@ -17,9 +17,9 @@ app.use(express.json());
 
 app.use(cookieParser());
 
-app.use(`/api/v1/companies` ,hospitals);
-app.use('/api/v1/auth',auth);
+app.use('/api/v1/companies' ,companies);
 app.use('/api/v1/bookings',bookings);
+app.use('/api/v1/auth',auth);
 
 
 const PORT = process.env.PORT || 5000;
