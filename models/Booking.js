@@ -10,7 +10,7 @@ const BookingSchema = new mongoose.Schema({
         ref: 'User' ,
         required: true,
     },
-    Company: {
+    company: {
         type: mongoose.Schema.ObjectId ,
         ref: 'Company' ,
         required: true,
