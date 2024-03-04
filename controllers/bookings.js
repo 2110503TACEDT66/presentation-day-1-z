@@ -81,12 +81,12 @@ exports.addBooking=async (req,res,next)=>{
         if(existedBookings.length >= 3 && req.user.role !== 'admin'){
             return res.status(400).json({success:false,message:`The user with ID ${req.user.id} has already made 3 bookings` });
         }
+        
+        const booking = await Booking.create(req.body) ;
 
         if(booking.user.toString()!== req.user.id && req.user.role !== 'admin'){
             return res.status(401).json({success: false, message: `User ${req.user.id} is not authorized to update this booking`});
         }
-        
-        const booking = await Booking.create(req.body) ;
 
         res.status(200).json({
             success:true,
