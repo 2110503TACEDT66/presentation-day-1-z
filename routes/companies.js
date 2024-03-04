@@ -13,7 +13,8 @@ router.route('/')
     .get(getCompanies)
     .post(protect, authorize('admin'),createCompany);
 router.route('/:id')
-    .get(getCompany).put(protect, authorize('admin'),updateCompany)
+    .get(getCompany)
+    .put(protect, authorize('admin'),updateCompany)
     .delete(protect,authorize('admin'), deleteCompany);
 
 module.exports = router;
