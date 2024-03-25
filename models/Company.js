@@ -40,6 +40,10 @@ const CompanySchema = new mongoose.Schema({
     tel : {
         type: String,
         required: [true, 'Please add a tel']
+    },
+    picture : {
+        type: String,
+        required : [true, 'Please add a picture']
     }
 }, {
     toJSON: {virtuals: true} ,
