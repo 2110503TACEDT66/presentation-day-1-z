@@ -15,6 +15,7 @@ exports.register = async (req,res,next)=>{
         sendTokenResponse(user,200,res)
     }catch(err){
         res.status(400).json({success:false});
+        console.log("-----------");
         console.log(err.stack);
     }
 }
