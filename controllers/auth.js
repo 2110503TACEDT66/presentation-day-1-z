@@ -1,12 +1,11 @@
 const User = require('../models/User');
 
 exports.register = async (req,res,next)=>{
-    console.log('auth.js');
+
     try{
-        console.log('register');
+        
         const {name,tel,email,password,role} = req.body;
-        console.log('req', req);
-        console.log('body', req.body);
+        console.log(req.body)
         const user = await User.create({
             name,
             tel,
