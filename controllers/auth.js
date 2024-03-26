@@ -5,7 +5,8 @@ exports.register = async (req,res,next)=>{
     try{
         console.log('register');
         const {name,tel,email,password,role} = req.body;
-        console.log(req);
+        console.log('req', req);
+        console.log('body', req.body);
         const user = await User.create({
             name,
             tel,
